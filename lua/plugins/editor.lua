@@ -56,13 +56,9 @@ return {
       },
     },
   },
-
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      {
-        "nvim-lua/plenary.nvim",
-      },
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
@@ -82,7 +78,8 @@ return {
       {
         ";f",
         function()
-          require("telescope.builtin").find_files({
+          local builtin = require("telescope.builtin")
+          builtin.find_files({
             no_ignore = false,
             hidden = true,
           })
@@ -92,7 +89,8 @@ return {
       {
         ";r",
         function()
-          require("telescope.builtin").live_grep({
+          local builtin = require("telescope.builtin")
+          builtin.live_grep({
             additional_args = { "--hidden" },
           })
         end,
@@ -101,35 +99,40 @@ return {
       {
         "\\\\",
         function()
-          require("telescope.builtin").buffers()
+          local builtin = require("telescope.builtin")
+          builtin.buffers()
         end,
         desc = "Lists open buffers",
       },
       {
         ";t",
         function()
-          require("telescope.builtin").help_tags()
+          local builtin = require("telescope.builtin")
+          builtin.help_tags()
         end,
         desc = "Lists available help tags and opens a new window with the relevant help info on <cr>",
       },
       {
         ";;",
         function()
-          ("telescope.builtin").resume()
+          local builtin = require("telescope.builtin")
+          builtin.resume()
         end,
         desc = "Resume the previous telescope picker",
       },
       {
         ";e",
         function()
-          require("telescope.builtin").diagnostics()
+          local builtin = require("telescope.builtin")
+          builtin.diagnostics()
         end,
         desc = "Lists Diagnostics for all open buffers or a specific buffer",
       },
       {
         ";s",
         function()
-          require("telescope.builtin").treesitter()
+          local builtin = require("telescope.builtin")
+          builtin.treesitter()
         end,
         desc = "Lists Function names, variables, from Treesitter",
       },
@@ -215,7 +218,6 @@ return {
       require("telescope").load_extension("file_browser")
     end,
   },
-
   {
     "saghen/blink.cmp",
     opts = {
